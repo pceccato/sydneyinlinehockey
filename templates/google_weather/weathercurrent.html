@@ -1,0 +1,18 @@
+<div class="forecast">
+
+    <table width="180px" >
+    <!-- current conditions -->
+    <div class="current-conditions">
+        <tr>
+            <td>
+                <span class="temp">{{ weather_dict.forecast_information.0.city }} {{ weather_dict.current_conditions.0.temp_c }} °C {{ weather_dict.current_conditions.0.condition }}</span><br/>
+                <span class="wind">{{  weather_dict.current_conditions.0.wind_condition }}</span><br/>
+                <span class="humidity">{{ weather_dict.current_conditions.0.humidity }}</span>
+            </td>
+            <td>
+                <span class="icon"><img src="http://www.google.com/{{ weather_dict.current_conditions.0.icon }}" /></span>
+            </td>
+        <tr>
+    </div> 
+    </table>
+</div>

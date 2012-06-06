@@ -1,0 +1,53 @@
+{% include "header.html" %}
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCgTaWGBuQnYinAIby3EbcDxcemL5DQKdg&sensor=false">
+</script>
+<script type="text/javascript">
+  function initialize() {
+    var latlng = new google.maps.LatLng(-33.897082,151.22435);
+    var monlatlng = new google.maps.LatLng(-33.896688,151.222873);
+    var sunlatlng = new google.maps.LatLng(-33.897618,151.223464);
+
+    var myOptions = {
+      zoom: 17,
+      center: latlng,
+      panControl: true,
+      zoomControl: true,
+      zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL
+      },
+      mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var sunGame = new google.maps.Marker({position: sunlatlng, map: map, title:"Sunday Game"});
+    var monGame = new google.maps.Marker({position: monlatlng, map: map, title:"Monday Night Game"});
+  }
+  $(document).ready(function() {
+    initialize()
+  });
+
+</script>
+         <!--start home content-->
+            <div id="left_column_610">
+              <div id="map_canvas" style="width:610px; height:450px"></div>
+            </div>
+            <div id="right_column_250">
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tbody>
+                <tr>
+                  <td valign="top" style="padding-left: 0px"><h1>Location:</h1>
+                    Anzac Parade, Moore Park NSW 2021,<br/>
+                    Australia (Parklands Tennis)<p/>
+                    You can always find parking in Robertson Road
+                  </td>
+                </tr>
+              </tbody>
+             </table>
+            </div>
+{% include "footer.html" %}

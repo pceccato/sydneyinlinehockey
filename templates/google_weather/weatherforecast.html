@@ -1,0 +1,29 @@
+<div class="forecast">
+    <!-- forecast information -->
+    <div class="forecast-information">
+        <span class="city">{{ weather_dict.forecast_information.0.city }}</span>
+    </div>
+    <table width="220px" >    
+    <!-- forecasts -->
+    <div class="forecasts">
+    
+        {% for day in weather_dict.forecast_conditions %}
+
+        <div class="forecast-day">
+        <tr>
+
+        <td>
+            <span class="day">{{ day.day_of_week }}</span><br/>
+            <span class="condition">{{ day.condition }}</span><br/>
+            <span class="high-low">{{ day.low}}°C - {{ day.high }}°C</span>
+        </td>
+        <td>
+            <span class="icon"><img src="http://www.google.com/{{ day.icon }}" /></span>
+        </td>
+        </div>
+        
+        {% endfor %}
+    </div>
+    </table>
+
+</div>

@@ -1,0 +1,27 @@
+{% include "header.html" %}
+          <div id="content">
+            <div id="left_column_610">
+              <div id="connect_wrapper">
+              <h1>Mailing List</h1>
+                <p><?php
+                if (mail("sydneyhockey-subscribe@yahoogroups.com", "", "", "From: " . $_POST['email']))
+                {
+                echo"Please check your email for a confirmation from yahoo groups, alternatively if you did not receive an email you can subscribe manually <a href='http://sports.groups.yahoo.com/group/sydneyhockey/' target='_blank'>here</a>.";
+                }
+                else
+                {
+                echo"Mail() failed. Please try again or , alternatively you can subscribe manually <a href='http://sports.groups.yahoo.com/group/sydneyhockey/' target='_blank'>here</a>.";
+                }
+                ?></p>
+              </div>
+            </div>
+            <!--end column 1-->
+            <div id="right_column_250">
+                <div class="side_menu">
+                    <div class="image"> <a href="http://twitter.com/inlinehockeysyd" target="_blank"><img src="images/general/twitter_220.png" alt="Twitter" width="220" height="41" border="0" /></a></div>
+                    <p>Not sure of the weather, or what time everyone will get there. Follow <a href="http://twitter.com/inlinehockeysyd" target="_blank">inlinehockeysyd</a> on twitter.</p>
+                 </div>
+            </div>
+            <!--end column 2-->
+            <div class="clear"></div>
+{% include "footer.html" %}

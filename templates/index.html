@@ -1,0 +1,140 @@
+{% include "header.html" %}
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<style type="text/css">
+
+.twtr-widget {
+    background: url("../images/side-bar-news-bg.jpg") no-repeat scroll left top transparent;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    margin-bottom: 0px;
+    padding: 0px 0px 0px;
+    width: 250px;
+
+	/*** cross browser box shadow ***/
+	-moz-box-shadow: 0 0 2px #fff;
+	-webkit-box-shadow: 0 0 2px #fff;
+	-ms-filter: &quot;progid:DXImageTransform.Microsoft.Glow(color=#ffffff,strength=3)&quot;;
+	filter:
+		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=0,strength=3)
+		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=90,strength=3)
+		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=180,strength=3)
+		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=270,strength=3);
+	box-shadow: 0 0 2px #fff;
+
+	/*** kind of cross browser rounded corner ***/
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+
+.twtr-widget .twtr-bd .twtr-tweet { /* they have 2 classes in default, do we have to use 3 */
+ 	margin: 0px 0 0;
+	 padding: 0 0 5px;
+	 border-bottom: 1px solid #cecece;
+}
+
+.twtr-tweet:before {
+	display: block;
+	float: left;
+	margin: -5px 0 0 5px;
+	font-size: 25px; /* let's make it a big quote! */
+	content: &quot;�&quot;;
+	color: #bababa;
+	text-shadow: 0 1px 1px #909090;
+	font-family  :Arial,Helvetica,sans-serif;
+}
+.twtr-ft { display: none; }
+
+}
+
+.twtr-user {
+}
+
+
+#news_column a, #news_column a:link, #news_column a:hover {
+    color: #C1242F;
+    font-size: 12px;
+    text-decoration: none;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+#news_column h3{
+    font-size: 0px;
+}
+
+</style>
+         <!--start home content-->
+            <div id="left_column_610">
+            <div id="banner">
+              <div id="banner_border"></div>
+              <div id="slider" class="nivoSlider">
+                  <a href="#" title=""><img src="images/slideshow/slide1.jpg" alt="" title="1" width="610" height="300" /></a>
+                  <a href="#" title=""><img src="images/slideshow/slide2.jpg" alt="" title="2" width="610" height="300" /></a>
+                  <a href="#" title=""><img src="images/slideshow/slide3.jpg" alt="" title="3" width="610" height="300" /></a>
+                  <a href="#" title=""><img src="images/slideshow/slide4.jpg" alt="" title="4" width="610" height="300" /></a>
+                  <a href="#" title=""><img src="images/slideshow/slide5.jpg" alt="" title="5" width="610" height="300" /></a>
+              </div>
+            </div>
+              <!--end banner-->
+              <div class="welcome_text">
+                <h1> Welcome</h1>
+                <p>Whether you're a Canadian backpacker longing for a chance to chase a puck, or an expat Czech keen to strap on some boots and go for a skate, or simply an Aussie local tired of skating in endless circles around Centennial park, Sydney Inline Hockey is the panacea for your troubles.</p>
+                <p>Inline hockey is the warm weather version of winter's Ice Hockey. Far from being a Clayton's version of the real game we play it on the concrete expanses of the Moore Park netball courts, and has its own unique characteristics and attributes.</p>
+                <p>It is a fast paced game that is usually played at the courts every Sunday afternoon or Monday evening, with either a ball or a biscuit (puck). The courts are currently unbounded by walls, so the focus of the game is on accurate passing and team work, as opposed to hero shots at goal and lots of ball chasing.</p>
+                <p>If you're tired of being a couch potato on Sunday afternoons, forced to watch endless telecasts of Australian cricketers, or giving your girlfriend endless afternoon foot massages, or simply want to get a bit more use out of those Rollerblades that have been sitting in your cupboard unused for the past 3 years, since the appearance of that evil, sledging Hahn Premium man-blading advertisement, grab a stick and a helmet and be a man (or woman) and come down to the courts to have a hit - all welcome.</p>
+              </div>
+            </div>
+            <!--end left column-->
+            <div id="right_column_250">
+              <!--start news-->
+              <div id="news_column" style="padding:0px 0px 0px 0px;margin-bottom: 0px;">
+                <script>
+                new TWTR.Widget({
+                  version: 2,
+                  type: 'profile',
+                  rpp: 8,
+                  interval: 30000,
+                  width: 250,
+                  height: 2500,
+                  theme: {
+                    shell: {
+                      background: 'transparent', //this is important
+                      color: '#FFFFFF'
+                    },
+                    tweets: {
+                	  background: 'transparent', //this is important
+                	  color: '#FFFFFF',
+                	  links: '#C1242F'
+                    }
+                  },
+                  features: {
+                    scrollbar: false,
+                    loop: false,
+                    live: false,
+                    hashtags: true,
+                    timestamp: true,
+                    avatars: false,
+                    behavior: 'all'
+                  },
+                  ready: function()
+                  {}
+
+                }).render().setUser('inlinehockeysyd').start();
+
+                </script>
+
+
+
+
+              </div>
+              <!--end news-->
+              <!--start welcome-->
+              <!--end welcome-->
+            </div>
+            <!--end right column-->
+            <!--end home content-->
+
+{% include "footer.html" %}
