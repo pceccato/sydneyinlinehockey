@@ -20,7 +20,12 @@ class BaseHandler(webapp2.RequestHandler):
         # passing it in as an argument to the template
         # en-GB for metric units
         weatherinfo = weather.getweather('Sydney','en-GB')
-        template_values = { 'weather_dict' : weatherinfo }
+
+
+        #TODO render this greeting
+        template_values = { 'weather_dict' : weatherinfo
+                          }
+                          
         return template_values
     
 
