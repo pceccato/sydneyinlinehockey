@@ -67,23 +67,34 @@ class Advert(db.Model):
   description  = db.StringProperty(multiline=True)
   image = db.BlobProperty()
   date = db.DateTimeProperty(auto_now_add=True)
-      
+  
+  
+class ShowItemHandler(BaseHandler):
+    def get(self):
+        template_values = self.get_template_values()
+            
+        adverts = db.GqlQuery("SELECT * "
+                            "FROM Advert "
+                            " ORDER BY date DESC")
+        template_values['adverts'] = adverts
+            
+        self.response.out.write(template.render('templates/showitems.html', template_values ))
+            
+              
 class SellItemHandler(BaseHandler):
     def get(self):
         template_values = self.get_template_values()
         user = users.get_current_user()
-        if user:
-            template_values['username'] = user.nickname()
-        else:
+        if not user:
             # make them login so they can list and add
             self.redirect(users.create_login_url(self.request.uri))
+        else:
+            template_values['username'] = user.nickname()
             
-        adverts = db.GqlQuery("SELECT * "
-                            "FROM Advert "
-                            "ORDER BY date DESC LIMIT 10")
-        template_values['adverts'] = adverts
+            adverts = db.GqlQuery("SELECT * FROM Advert WHERE seller=:1 ORDER BY date DESC", user )
+            template_values['adverts'] = adverts
             
-        self.response.out.write(template.render('templates/sellItem.html', template_values ))
+            self.response.out.write(template.render('templates/sellItem.html', template_values ))
             
     def saveAd( self, summary, description, image ):
         """save ad to datastore"""   
@@ -101,21 +112,32 @@ class SellItemHandler(BaseHandler):
             
         advert.put()
         return True
-        
+    
+    def deleteAd(self, ad):
+            db.delete(ad)
 
                 
     def post(self):
+        ad = self.request.get('deletead')
         summary = self.request.get('summary')
         description = self.request.get('description')
         image = self.request.get('image')
         
-        self.saveAd( summary, description, image )
+        if ad:
+            self.deleteAd(ad)           
+        else: 
+            self.saveAd( summary, description, image )
+            
+        # is there a better way than hardcoding?
+        self.redirect('/sellitem.html')
                
-        self.response.out.write('<html><body>Your Ad:<br>')
-        self.response.out.write(summary)
-        self.response.out.write('<br>')
-        self.response.out.write(description)
-        self.response.out.write('</body></html>')
+        #self.response.out.write('<html><body>Your Ad:<br>')
+        #self.response.out.write(ad)
+        #self.response.out.write('<br>')
+        #self.response.out.write(summary)
+        #self.response.out.write('<br>')
+        #self.response.out.write(description)
+        #self.response.out.write('</body></html>')
 
 # simply serves the images stored in our adverts
 class Image(webapp2.RequestHandler):
@@ -127,8 +149,6 @@ class Image(webapp2.RequestHandler):
         else:
             self.error(404)         
             
-       
-
 app = webapp2.WSGIApplication(  [('/', MainHandler),
                                 ('/news.html', NewsHandler),
                                 ('/location.html', LocationHandler),
@@ -137,6 +157,7 @@ app = webapp2.WSGIApplication(  [('/', MainHandler),
                                 ('/index.html', MainHandler),
                                 ('/links.html', LinksHandler),
                                  ('/sellitem.html', SellItemHandler),
+                                 ('/showitems.html', ShowItemHandler ),
                                 ('/maillist.html', MailHandler),
                                 ('/img', Image)],
                                 debug=True)

@@ -3,16 +3,8 @@
             <div id="left_column_610">
               <div id="connect_wrapper">
               <h1>Mailing List</h1>
-                <p><?php
-                if (mail("sydneyhockey-subscribe@yahoogroups.com", "", "", "From: " . $_POST['email']))
-                {
-                echo"Please check your email for a confirmation from yahoo groups, alternatively if you did not receive an email you can subscribe manually <a href='http://sports.groups.yahoo.com/group/sydneyhockey/' target='_blank'>here</a>.";
-                }
-                else
-                {
-                echo"Mail() failed. Please try again or , alternatively you can subscribe manually <a href='http://sports.groups.yahoo.com/group/sydneyhockey/' target='_blank'>here</a>.";
-                }
-                ?></p>
+                <p><a href="mailto:sydneyhockey-subscribe@yahoogroups.com">Subscribe to our mailing list.</a></p>
+                You must respond to the confirmation email from yahoo to complete the subscription process.
               </div>
             </div>
             <!--end column 1-->

@@ -1,50 +1,68 @@
 {% include "header.html" %}
-          <div id="content">
-            <div id="left_column_610">
-              <div id="connect_wrapper">
-              <h1>Hello {{ username }}, welcome to the Sydney Inline Hockey trading post </h1>
+
+              <h1>Hello {{ username }},
+              <p/>
+              <h1>Welcome to the Sydney Inline Hockey trading post </h1>
               
+				{% if adverts.count > 0 %}
+				You can delete any of your previous posts below:
+				{% endif %}
 
                 {% for advert in adverts %}
                 <div class="news_box_container" >
-                <div class="image"> <img src="img?img_id={{ advert.key }}" alt="Thumb" width="130" height="130" border="0" /> </div>
-                <div class="text">
-                <h2> {{ advert.summary }}</h2>
 
-                {{ advert.description }}
-                </div>
+                {% if advert.image %}
+                	<div class="image"> <img src="img?img_id={{ advert.key }}" alt="Thumb" width="130" height="130" border="0" /> </div>
+                 	<div class="text">
+                	<h2> {{ advert.summary }}</h2>
+
+                		{{ advert.description }}
+                	</div>               
+                {% else %}
+                 	<div class="text">
+                	<h2> {{ advert.summary }}</h2>
+
+                		{{ advert.description }}
+                	</div>  
+
+                {% endif %}
+
                 <div class="stats">
                   <ul>
                     <li>posted on {{ advert.date }} by {{ advert.seller }}</li>
-                  </ul>
+                  </ul>                
                 </div>
+
                 <hr class="clear" />
                 </div>
+                    <div class="date">
+                	    <form action="/sellitem.html" method="post"  >
+                   			<fieldset id="contact_no_map">
+                        		<input type="hidden" value="{{ advert.key }}" name="deletead" />
+                            	<input name="delete_ad" type="submit" id="submit_message" class="ad_button" value="Delete" />
+                    		</fieldset>
+                    	</form>
+                	</div>
                 
                 {% endfor %}                
                 
-
                 <p>Post your ad here</p>
                     <form action="/sellitem.html" method="post" enctype="multipart/form-data" >
                         <fieldset id="contact_no_map">
                             <label for="summary">Heading:</label>
-                            <input type="text" name="summary" type="text" class="forms_no_map" id="summary" size="50" />
+                            <input type="text" name="summary" type="text" class="forms_no_map" id="summary" size="60" />
                             <div class="clear"></div>
                             <label type="text" for="price">Description:</label>
-                            <textarea name="description"  class="forms_no_map" id="price" rows="10" cols="50" >Enter the details of your advertisement here</textarea>
-                            <div class="clear" />
-                            <label type="text" for="image"Image:</label>
+                            <textarea name="description"  class="forms_no_map" id="price" rows="10" cols="60" >Enter the details of your advertisement here</textarea>
+
+                            <label type="text" for="image">Photo to Upload:</label>
                             <input type="file" name="image" size="40" class="forms_no_map" >
                             <input name="submit_message" type="submit" id="submit_message" class="submit_button" value="Post Ad" />
                         </fieldset>
                     </form>
-              </div>
-            </div>
+
             <!--end column 1-->
-            <div id="right_column_250">
-                <div class="side_menu">
-                 </div>
-            </div>
+
             <!--end column 2-->
             <div class="clear"></div>
 {% include "footer.html" %}

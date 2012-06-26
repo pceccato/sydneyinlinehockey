@@ -15,7 +15,7 @@ body {
 	text-align:center; /*helps center the design for older browsers*/
 }
 a, a:link, a:visited {
-	color:#c1242f;
+	color: ;
 	outline: none; /*gets rid of dotted select lines after clicking an image link*/
 }
 a:hover {
@@ -611,7 +611,7 @@ th { /*top row of the table*/
 	border:1px solid #1c1c1c;
 }
 .news_box_container .text {
-	float:right;
+	float:left;
 	width:450px;
 	height:112px;
 	padding:0px 0px;
@@ -628,6 +628,7 @@ th { /*top row of the table*/
 	border-top:1px dashed #1c1c1c;
 	border-bottom:1px dashed #1c1c1c;
 	float:right;
+	clear:both;
 	width:450px;
 	margin-top:7px;
 }
@@ -774,6 +775,21 @@ form {
 }
 #contact .submit_button {
 	width:91px;/*69px*/
+	float: right;
+	height:24px;
+	background:url(../images/button_small.png) no-repeat top left;
+	text-align:center;
+	padding:0px 0 0 0;
+	margin:10px auto 0 auto;
+	border:none;
+	color:#000;
+	font-size:14px;
+	font-family: 'Copse', arial, serif;
+	line-height:normal;
+}
+
+#contact .ad_button {
+	width:91px;/*69px*/
 	height:24px;
 	background:url(../images/button_small.png) no-repeat top left;
 	text-align:center;
@@ -886,6 +902,20 @@ ul.map_buttons li a {
 	float:left;
 }
 #contact_no_map .submit_button {
+	width:91px;/*69px*/
+	height:24px;
+	clear:both;
+	background:url(../images/button_small.png) no-repeat top left;
+	text-align:center;
+	padding:0px 0 0 0;
+	margin:10px auto 0 253px;
+	border:none;
+	color:#000;
+	font-size:14px;
+	font-family: 'Copse', arial, serif;
+	line-height:normal;
+}
+#contact_no_map .ad_button {
 	width:91px;/*69px*/
 	height:24px;
 	clear:both;
