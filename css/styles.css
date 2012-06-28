@@ -42,14 +42,14 @@ a:hover {
 	margin:36px 0 0 30px;/*the indent on the top and left side*/
 	float:left;
 }
-#header_phone {
+#header_weather {
 	width:289px;
 	height:98px;
 	float:right;
 	margin:0px 0px 0 0;
 	background:url(../images/phone_box.png) no-repeat top right;
 }
-#phone_margin {
+#weather_margin {
 	color:#FFF;
 	margin:20px 0 0 75px;
 }
@@ -82,6 +82,20 @@ a:hover {
 	clear:both;
 	background:url(../images/menu_bg.jpg) no-repeat top left;
 }
+#greeting { /* login/logout link */
+	float: right;
+	color:#c1242f;
+
+}
+#greeting a  {
+    color:#c1242f;
+}
+#greeting a:hover {
+
+    color:#c1242f;
+}
+
+
 ul#navigation {
 	margin:0px 0 0 30px; /*adjust indent to center the menu*/
 	padding:0px;

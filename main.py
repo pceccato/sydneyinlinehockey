@@ -20,10 +20,17 @@ class BaseHandler(webapp2.RequestHandler):
         # passing it in as an argument to the template
         # en-GB for metric units
         weatherinfo = weather.getweather('Sydney','en-GB')
-
+        user = users.get_current_user()
+        if user:
+            greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
+                        (user.nickname(), users.create_logout_url("/")))
+        else:
+            greeting = ("<a href=\"%s\">Sign in or register</a>" %
+                        users.create_login_url("/"))
 
         #TODO render this greeting
-        template_values = { 'weather_dict' : weatherinfo
+        template_values = { 'weather_dict' : weatherinfo,
+                            'greeting' : greeting
                           }
                           
         return template_values

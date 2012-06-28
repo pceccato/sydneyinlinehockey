@@ -25,11 +25,9 @@
 <div id="wrapper">
 <div id="header">
   <div id="logo"><a href="index.html"><img src="images/logo.png" width="559" height="44" alt="Logo" border="0" /></a></div>
-  <div id="header_phone">
-    <div id="phone_margin">
+  <div id="header_weather">
+    <div id="weather_margin">
         {% include "google_weather/weathercurrent.html" %}
-
-
     </div>
   </div>
 </div>
@@ -51,6 +49,8 @@
     </li>
   </ul>
   <!--end navigation-->
-
+</div>
+<div id="greeting">
+{{ greeting|safe }}
 </div>
 <div id="content">
