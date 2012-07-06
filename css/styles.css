@@ -15,7 +15,7 @@ body {
 	text-align:center; /*helps center the design for older browsers*/
 }
 a, a:link, a:visited {
-	color: ;
+	color:#c1242f;
 	outline: none; /*gets rid of dotted select lines after clicking an image link*/
 }
 a:hover {

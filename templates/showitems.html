@@ -1,22 +1,38 @@
 {% include "header.html" %}
 
-
-              
-              <h1>Trading Post - Buy, Sell or Wanted</h1>
-                <h2><a href="/sellitem.html">Post your own Advertisement</a></h2>
+            
+              <h1>Trading Post - For Sale, Wanted and Information Bulletins</h1>
+                <p>
+                If you need any new gear like skates or wheels, please check out <a href="http://www.skaterhq.com.au">SkaterHQ</a> at either their Manly or Moore Park stores.
+                They have been supporting Monday Night Hockey since we started playing at Moore Park and will always look after you.</p>
+                <p> This section of the site is for second hand gear/used gear- if you have any surplus hockey gear
+                then please <a href="/sellitem.html">post</a> it here. Getting fully kitted out for inline hockey can be expensive,
+                so hopefully we can help out some newbies with kit by posting it here.</p>
+                
+                <h2><a href="/sellitem.html">Post a For Sale/Wanted/Information Bulletin</a></h2>
                 <p>We use Google for authentication, so if you have a
                 Google account you're sweet to post immediately, otherwise its a few short steps to create an account.</p>
                 
+				{% if adverts.count == 0 %}
+				    <H2>Sorry, there are no listings at moment... please check back later.</H2>
+				{% else %}
+				    {% if adverts.count == 1 %}
+				        <H2>There is only one listing today:</H2>
+				    {% else %}
+				        <H2>There are {{ adverts.count }} listings today:</H2>
+				    {% endif %}				
+				{% endif %}
 				
                 {% for advert in adverts %}
-                
-                
-                
-                
+                              
                 <div class="news_box_container" >
                 
                 {% if advert.image %}
-                	<div class="image"> <img src="img?img_id={{ advert.key }}" alt="Thumb" width="130" height="130" border="0" /> </div>
+                	<div class="image">
+                	<a href="img?img_id={{ advert.key }}">
+                	<img src="thm?img_id={{ advert.key }}" alt="Thumb" width="130" height="130" border="0" /> 
+                	</a>
+                	</div>
                  	<div class="text">
                 	<h2> {{ advert.summary }}</h2>
 
@@ -41,5 +57,7 @@
                 
                 {% endfor %}                
 
-            <div class="clear"></div>
+            <div class="clear"/>
+            <a href="http://www.skaterhq.com.au"><img src="/images/skaterhqbanner.jpg" /></a>
+            <div class="clear"/>
 {% include "footer.html" %}

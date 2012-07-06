@@ -6,9 +6,6 @@ import weather
 from google.appengine.ext import db
 from google.appengine.api import users
 
-
-
-
 class BaseHandler(webapp2.RequestHandler):
 
     # override in your class and call base first if you need to add any more template
@@ -30,7 +27,8 @@ class BaseHandler(webapp2.RequestHandler):
 
         #TODO render this greeting
         template_values = { 'weather_dict' : weatherinfo,
-                            'greeting' : greeting
+                            'greeting' : greeting,
+                            'user' : user
                           }
                           
         return template_values
@@ -73,6 +71,7 @@ class Advert(db.Model):
   summary = db.StringProperty()
   description  = db.StringProperty(multiline=True)
   image = db.BlobProperty()
+  thumbnail = db.BlobProperty()
   date = db.DateTimeProperty(auto_now_add=True)
   
   
@@ -103,6 +102,48 @@ class SellItemHandler(BaseHandler):
             
             self.response.out.write(template.render('templates/sellItem.html', template_values ))
             
+    def rescale(self, img_data, width, height, halign='middle', valign='middle'):
+        """Resize then optionally crop a given image.
+        
+        Attributes:
+        img_data: The image data
+        width: The desired width
+        height: The desired height
+        halign: Acts like photoshop's 'Canvas Size' function, horizontally
+                aligning the crop to left, middle or right
+        valign: Verticallly aligns the crop to top, middle or bottom
+        
+        """
+        image = images.Image(img_data)
+        
+        desired_wh_ratio = float(width) / float(height)
+        wh_ratio = float(image.width) / float(image.height)
+        
+        if desired_wh_ratio > wh_ratio:
+            # resize to width, then crop to height
+            image.resize(width=width)
+            image.execute_transforms()
+            trim_y = (float(image.height - height) / 2) / image.height
+            if valign == 'top':
+                image.crop(0.0, 0.0, 1.0, 1 - (2 * trim_y))
+            elif valign == 'bottom':
+                image.crop(0.0, (2 * trim_y), 1.0, 1.0)
+            else:
+                image.crop(0.0, trim_y, 1.0, 1 - trim_y)
+        else:
+        # resize to height, then crop to width
+            image.resize(height=height)
+            image.execute_transforms()
+            trim_x = (float(image.width - width) / 2) / image.width
+            if halign == 'left':
+                image.crop(0.0, 0.0, 1 - (2 * trim_x), 1.0)
+            elif halign == 'right':
+                image.crop((2 * trim_x), 0.0, 1.0, 1.0)
+            else:
+                image.crop(trim_x, 0.0, 1 - trim_x, 1.0)
+                
+        return image.execute_transforms()
+            
     def saveAd( self, summary, description, image ):
         """save ad to datastore"""   
         advert = Advert()
@@ -111,11 +152,13 @@ class SellItemHandler(BaseHandler):
         user = users.get_current_user()
         advert.seller = user
         
-        # make a thumbnail
+
         if image:
-            # thumbnail = images.resize(image, 32, 32)
-            thumbnail = image
-            advert.image = db.Blob(thumbnail)
+            thumbnail = self.rescale(image, 130, 130)
+            #doesn't respect aspect
+            #thumbnail = images.resize(image,130,130)
+            advert.thumbnail = db.Blob(thumbnail)
+            advert.image = db.Blob(image)
             
         advert.put()
         return True
@@ -146,6 +189,9 @@ class SellItemHandler(BaseHandler):
         #self.response.out.write(description)
         #self.response.out.write('</body></html>')
 
+#we could get ride of these handlers if we stored out images in the blobstore
+# and used get_serving_url() to generate URLS for them
+#
 # simply serves the images stored in our adverts
 class Image(webapp2.RequestHandler):
     def get(self):
@@ -154,7 +200,17 @@ class Image(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = "image"
             self.response.out.write(advert.image)
         else:
-            self.error(404)         
+            self.error(404)  
+            
+# simply serves the thumbnails stored in our adverts
+class Thumb(webapp2.RequestHandler):
+    def get(self):
+        advert = db.get(self.request.get("img_id"))
+        if advert.thumbnail:
+            self.response.headers['Content-Type'] = "image"
+            self.response.out.write(advert.thumbnail)
+        else:
+            self.error(404)        
             
 app = webapp2.WSGIApplication(  [('/', MainHandler),
                                 ('/news.html', NewsHandler),
@@ -166,5 +222,6 @@ app = webapp2.WSGIApplication(  [('/', MainHandler),
                                  ('/sellitem.html', SellItemHandler),
                                  ('/showitems.html', ShowItemHandler ),
                                 ('/maillist.html', MailHandler),
-                                ('/img', Image)],
+                                ('/img', Image),
+                                ('/thm', Thumb)],
                                 debug=True)
