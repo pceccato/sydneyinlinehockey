@@ -16,7 +16,7 @@ class BaseHandler(webapp2.RequestHandler):
         # explicitly loading the weather from google here and
         # passing it in as an argument to the template
         # en-GB for metric units
-        weatherinfo = weather.getweather('Sydney','en-GB')
+        #weatherinfo = weather.getweather('Sydney','en-GB')
         user = users.get_current_user()
         if user:
             greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
@@ -26,7 +26,7 @@ class BaseHandler(webapp2.RequestHandler):
                         users.create_login_url("/"))
 
         #TODO render this greeting
-        template_values = { 'weather_dict' : weatherinfo,
+        template_values = { #'weather_dict' : weatherinfo,
                             'greeting' : greeting,
                             'user' : user
                           }
