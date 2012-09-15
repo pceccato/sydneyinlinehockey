@@ -1,24 +1,24 @@
 <div class="forecast">
     <!-- forecast information -->
     <div class="forecast-information">
-        <span class="city">{{ weather_dict.forecast_information.0.city }}</span>
+        <span class="city">{{ weather_dict.location.city }} , {{ weather_dict.location.country_name }} </span>
     </div>
-    <table width="220px" >    
+    <table width="230px" >    
     <!-- forecasts -->
     <div class="forecasts">
-    
-        {% for day in weather_dict.forecast_conditions %}
+
+            <br/>
+        {% for day in weather_dict.forecast.txt_forecast.forecastday %}
 
         <div class="forecast-day">
         <tr>
 
         <td>
-            <span class="day">{{ day.day_of_week }}</span><br/>
-            <span class="condition">{{ day.condition }}</span><br/>
-            <span class="high-low">{{ day.low}}°C - {{ day.high }}°C</span>
+            <span class="day"><B>{{ day.title }}</B></span><br/>
+            <span class="condition">{{ day.fcttext_metric }}</span><br/>
         </td>
         <td>
-            <span class="icon"><img src="http://www.google.com/{{ day.icon }}" /></span>
+            <span class="icon"><img src="{{ day.icon_url }}" /></span>
         </td>
         </div>
         

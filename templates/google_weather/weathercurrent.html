@@ -1,16 +1,16 @@
 <div class="forecast">
 
-    <table width="180px" >
+    <table width="230px" >
     <!-- current conditions -->
     <div class="current-conditions">
         <tr>
             <td>
-                <span class="temp">{{ weather_dict.forecast_information.0.city }} {{ weather_dict.current_conditions.0.temp_c }} °C {{ weather_dict.current_conditions.0.condition }}</span><br/>
-                <span class="wind">{{  weather_dict.current_conditions.0.wind_condition }}</span><br/>
-                <span class="humidity">{{ weather_dict.current_conditions.0.humidity }}</span>
+                <span class="temp"> {{ weather_dict.current_observation.temp_c }} °C {{ weather_dict.current_observation.weather }}</span><br/>
+                <span class="wind">Wind {{  weather_dict.current_observation.wind_kph }} kph from the {{ weather_dict.current_observation.wind_dir }}</span><br/>
+                <span class="humidity">Humidity {{ weather_dict.current_observation.relative_humidity }}</span>
             </td>
             <td>
-                <span class="icon"><img src="http://www.google.com/{{ weather_dict.current_conditions.0.icon }}" /></span>
+                <span class="icon"><img src="{{ weather_dict.current_observation.icon_url }}" /></span>
             </td>
         <tr>
     </div> 

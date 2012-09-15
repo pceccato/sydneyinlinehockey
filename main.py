@@ -5,18 +5,27 @@ import weather
 
 from google.appengine.ext import db
 from google.appengine.api import users
+from google.appengine.api import memcache
+
+
 
 class BaseHandler(webapp2.RequestHandler):
 
+    # cache weather as we only get 500 weather requests per day in the free plan!
+    def get_weather(self):
+        data = memcache.get('weather')
+        if data is not None:
+            return data
+        else:
+            data = weather.getWeatherFromWunderground('Australia','Sydney')
+            memcache.add('weather', data, 30 * 60) #refresh every half hour
+            return data
+            
     # override in your class and call base first if you need to add any more template
     # values for your page.
     # every page header needs the news, which is why we do it here
     def get_template_values(self):
-        # could use djangos template tags feature instead of
-        # explicitly loading the weather from google here and
-        # passing it in as an argument to the template
-        # en-GB for metric units
-        #weatherinfo = weather.getweather('Sydney','en-GB')
+        
         user = users.get_current_user()
         if user:
             greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
@@ -26,7 +35,7 @@ class BaseHandler(webapp2.RequestHandler):
                         users.create_login_url("/"))
 
         #TODO render this greeting
-        template_values = { #'weather_dict' : weatherinfo,
+        template_values = { 'weather_dict' : self.get_weather(),
                             'greeting' : greeting,
                             'user' : user
                           }
