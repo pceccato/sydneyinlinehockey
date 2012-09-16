@@ -5,6 +5,7 @@
     <div class="current-conditions">
         <tr>
             <td>
+                <span class="city"><a href="{{ weather_dict.location.wuiurl }}">{{ weather_dict.location.city }} , {{ weather_dict.location.country_name }}</a></span>
                 <span class="temp"> {{ weather_dict.current_observation.temp_c }} °C {{ weather_dict.current_observation.weather }}</span><br/>
                 <span class="wind">Wind {{  weather_dict.current_observation.wind_kph }} kph from the {{ weather_dict.current_observation.wind_dir }}</span><br/>
                 <span class="humidity">Humidity {{ weather_dict.current_observation.relative_humidity }}</span>
