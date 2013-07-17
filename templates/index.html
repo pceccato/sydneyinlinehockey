@@ -1,58 +1,6 @@
-{% include "header.html" %}
+﻿{% include "header.html" %}
 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 <style type="text/css">
-
-.twtr-widget {
-    background: url("../images/side-bar-news-bg.jpg") no-repeat scroll left top transparent;
-    color: #FFFFFF;
-    float: left;
-    font-size: 12px;
-    margin-bottom: 0px;
-    padding: 0px 0px 0px;
-    width: 250px;
-
-	/*** cross browser box shadow ***/
-	-moz-box-shadow: 0 0 2px #fff;
-	-webkit-box-shadow: 0 0 2px #fff;
-	-ms-filter: &quot;progid:DXImageTransform.Microsoft.Glow(color=#ffffff,strength=3)&quot;;
-	filter:
-		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=0,strength=3)
-		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=90,strength=3)
-		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=180,strength=3)
-		progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=270,strength=3);
-	box-shadow: 0 0 2px #fff;
-
-	/*** kind of cross browser rounded corner ***/
-	-webkit-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-
-
-.twtr-widget .twtr-bd .twtr-tweet { /* they have 2 classes in default, do we have to use 3 */
- 	margin: 0px 0 0;
-	 padding: 0 0 5px;
-	 border-bottom: 1px solid #cecece;
-}
-
-.twtr-tweet:before {
-	display: block;
-	float: left;
-	margin: -5px 0 0 5px;
-	font-size: 25px; /* let's make it a big quote! */
-	content: &quot;�&quot;;
-	color: #bababa;
-	text-shadow: 0 1px 1px #909090;
-	font-family  :Arial,Helvetica,sans-serif;
-}
-.twtr-ft { display: none; }
-
-}
-
-.twtr-user {
-}
-
 
 #news_column a, #news_column a:link, #news_column a:hover {
     color: #C1242F;
@@ -107,43 +55,9 @@
             <div id="right_column_250">
               <!--start news-->
               <div id="news_column" style="padding:0px 0px 0px 0px;margin-bottom: 0px;">
-                <script>
-                new TWTR.Widget({
-                  version: 2,
-                  type: 'profile',
-                  rpp: 8,
-                  interval: 30000,
-                  width: 250,
-                  height: 2500,
-                  theme: {
-                    shell: {
-                      background: 'transparent', //this is important
-                      color: '#FFFFFF'
-                    },
-                    tweets: {
-                	  background: 'transparent', //this is important
-                	  color: '#FFFFFF',
-                	  links: '#C1242F'
-                    }
-                  },
-                  features: {
-                    scrollbar: false,
-                    loop: false,
-                    live: false,
-                    hashtags: true,
-                    timestamp: true,
-                    avatars: false,
-                    behavior: 'all'
-                  },
-                  ready: function()
-                  {}
-
-                }).render().setUser('inlinehockeysyd').start();
-
-                </script>
-
-
-
+<!-- twitter widget -->
+<a class="twitter-timeline" href="https://twitter.com/inlinehockeysyd" data-widget-id="357302243281747968">Tweets by @inlinehockeysyd</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
               </div>
               <!--end news-->
